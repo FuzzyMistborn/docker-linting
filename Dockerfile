@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM python:3.8
 
 ARG BUILD_DATE
 
