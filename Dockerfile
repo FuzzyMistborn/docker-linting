@@ -9,10 +9,4 @@ LABEL \
   org.opencontainers.image.description="Installs ansible-lint and yaml-lint for linting" \
   org.opencontainers.image.created=$BUILD_DATE
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils \
-    python3-pip \
-    python3-setuptools \
-    software-properties-common && \
-    rm -rf /var/lib/apt/lists/* && \
-    pip3 install "ansible-lint[core,yamllint]"
+RUN pip3 install "ansible-lint[core,yamllint]"
