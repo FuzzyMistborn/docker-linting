@@ -18,6 +18,27 @@ steps:
     username: fuzzymistborn
     password:
       from_secret: ghcr_pw
-    repo: fuzzymistborn/docker-linting
+    repo: ghcr.io/fuzzymistborn/docker-linting
     registry: ghcr.io
     tags: latest
+
+- name: Send TG Notification
+  image: appleboy/drone-telegram
+  settings:
+    token:
+      from_secret: tg_token
+    to:
+      from_secret: tg_id
+    format: markdown
+    message: >
+      {{#success build.status}}
+        ✅  Build for `{{repo.name}}` was *successful*!
+
+        🌐  [Output]({{build.link}})
+      {{else}}
+        ❌  Build for `{{repo.name}}` has *FAILED*!
+
+        🌐  [Output]({{build.link}})
+      {{/success}}
+  when:
+    status: [ success, failure ]
