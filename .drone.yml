@@ -38,13 +38,13 @@ steps:
     format: markdown
     message: >
       {{#success build.status}}
-        ✅  Build for `{{repo.name}}` was *successful*!
+      ✅  Build for `{{repo.name}}` was *successful*!
 
-        🌐  [Output]({{build.link}})
+      🌐  [Output]({{build.link}})
       {{else}}
-        ❌  Build for `{{repo.name}}` has *FAILED*!
+      ❌  Build for `{{repo.name}}` has *FAILED*!
 
-        🌐  [Output]({{build.link}})
+      🌐  [Output]({{build.link}})
       {{/success}}
   when:
     status: [ success, failure ]
