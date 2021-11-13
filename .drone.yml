@@ -8,6 +8,11 @@ trigger:
   cron:
   - monthly
 
+volumes:
+- name: docker_sock
+  host:
+    path: /var/run/docker.sock
+
 steps:
 - name: Build and push release
   image: fuzzymistborn/docker-alpine-skopeo:latest
