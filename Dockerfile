@@ -14,4 +14,4 @@ LABEL \
   org.opencontainers.image.revision=$VCS_REF \
   org.opencontainers.image.created=$BUILD_DATE
 
-RUN pip3 install "ansible-lint[core,yamllint]"
+RUN pip3 install "ansible-lint[community,yamllint]"
