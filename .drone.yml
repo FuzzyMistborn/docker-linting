@@ -14,7 +14,7 @@ volumes:
     path: /var/run/docker.sock
 
 steps:
-- name: Build and push release
+- name: Build and push release (Scheduled)
   image: fuzzymistborn/docker-alpine-skopeo:latest
   environment:
     DOCKERHUB_PASS:
@@ -32,7 +32,7 @@ steps:
     - docker push --all-tags fuzzymistborn/docker-linting
     - docker push --all-tags ghcr.io/fuzzymistborn/docker-linting
 
-- name: Send TG Notification
+- name: Send TG Notification (Scheduled)
   image: appleboy/drone-telegram
   settings:
     token:
@@ -46,7 +46,7 @@ steps:
 
 kind: pipeline
 type: docker
-name: Docker Build (Trigger)
+name: Docker Build (Triggered)
 
 trigger:
   event:
@@ -58,7 +58,7 @@ volumes:
     path: /var/run/docker.sock
 
 steps:
-- name: Build and push release
+- name: Build and push release (Triggered)
   image: fuzzymistborn/docker-alpine-skopeo:latest
   environment:
     DOCKERHUB_PASS:
@@ -76,7 +76,7 @@ steps:
     - docker push --all-tags fuzzymistborn/docker-linting
     - docker push --all-tags ghcr.io/fuzzymistborn/docker-linting
 
-- name: Send TG Notification
+- name: Send TG Notification (Triggered)
   image: appleboy/drone-telegram
   settings:
     token:
