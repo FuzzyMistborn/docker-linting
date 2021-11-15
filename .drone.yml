@@ -3,11 +3,8 @@ type: docker
 name: Docker Build
 
 trigger:
-  event:
-  - cron
-  - custom
-  cron:
-  - monthly
+  branch:
+  - dev
 
 volumes:
 - name: docker_sock
@@ -29,9 +26,9 @@ steps:
   commands:
     - docker login docker.io -u fuzzymistborn -p $DOCKERHUB_PASS
     - docker login ghcr.io -u fuzzymistborn -p $GHCR_PASS
-    - docker build -t fuzzymistborn/docker-linting:latest -t fuzzymistborn/docker-linting:$PYTHON_VER -t ghcr.io/fuzzymistborn/docker-linting:latest -t ghcr.io/fuzzymistborn/docker-linting:$PYTHON_VER .
-    - docker push --all-tags fuzzymistborn/docker-linting
-    - docker push --all-tags ghcr.io/fuzzymistborn/docker-linting
+    - docker build -t fuzzymistborn/docker-linting:dev -t ghcr.io/fuzzymistborn/docker-linting:dev .
+    - docker push fuzzymistborn/docker-linting:dev
+    - docker push ghcr.io/fuzzymistborn/docker-linting:dev
 
 - name: Send TG Notification
   image: appleboy/drone-telegram
@@ -41,6 +38,6 @@ steps:
     to:
       from_secret: tg_id
     format: markdown
-    message: "{{#success build.status}}✅  Build for `{{repo.name}}` was *successful*!{{else}}❌  Build for `{{repo.name}}` has *FAILED*!{{/success}} \n🌐  [Output]({{build.link}})\n📝  Commit: {{ commit.message }}"
+    message: "{{#success build.status}}✅  Dev Build for `{{repo.name}}` was *successful*!{{else}}❌  Dev Build for `{{repo.name}}` has *FAILED*!{{/success}} \n🌐  [Output]({{build.link}})\n📝  Commit: {{ commit.message }}"
   when:
     status: [ success, failure ]
