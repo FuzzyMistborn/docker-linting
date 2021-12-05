@@ -3,7 +3,5 @@
 Docker image that includes both `yamllint` and `ansible-lint` for linting my Ansible roles.
 
 ### If you appreciate my work, please consider buying me a beer (or coffee, or whatever)
-[![BuyMeCoffee][buymecoffee-shield]][buymecoffee-link]
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E5796VZ)
 
-[buymecoffee-link]: https://www.buymeacoffee.com/fuzzymistborn
-[buymecoffee-shield]: https://cdn.buymeacoffee.com/buttons/v2/default-blue.png
