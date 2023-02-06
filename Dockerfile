@@ -6,7 +6,7 @@ ARG VCS_REF
 LABEL \
   maintainer="FuzzyMistborn <fuzzy@fuzzymistborn.com>" \
   architecture="amd64/x86_64" \
-  python-version="3.8" \
+  python-version="3.10" \
   org.opencontainers.image.title="docker-linting" \
   org.opencontainers.image.authors="FuzzyMistborn <fuzzy@fuzzymistborn.com>" \
   org.opencontainers.image.description="Installs ansible-lint and yaml-lint for linting" \
