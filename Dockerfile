@@ -14,6 +14,6 @@ LABEL \
   org.opencontainers.image.revision=$VCS_REF \
   org.opencontainers.image.created=$BUILD_DATE
 
-RUN apk add --update git
+RUN apt-get update && apt-get -y install git
 RUN pip3 install "ansible"
 RUN pip3 install "ansible-lint"
