@@ -5,6 +5,7 @@ name: Docker Build (Scheduled)
 trigger:
   event:
   - cron
+  - push
   cron:
   - monthly
 
