@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -6,7 +6,7 @@ ARG VCS_REF
 LABEL \
   maintainer="FuzzyMistborn <fuzzy@fuzzymistborn.com>" \
   architecture="amd64/x86_64" \
-  python-version="3.10" \
+  python-version="3.12" \
   org.opencontainers.image.title="docker-linting" \
   org.opencontainers.image.authors="FuzzyMistborn <fuzzy@fuzzymistborn.com>" \
   org.opencontainers.image.description="Installs ansible-lint and yaml-lint for linting" \
