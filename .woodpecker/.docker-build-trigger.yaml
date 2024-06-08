@@ -1,0 +1,34 @@
+steps:
+  - name: Build and push release
+    image: fuzzymistborn/docker-alpine-skopeo:latest
+    environment:
+      - ALPINE_VER=alpine-3.20
+    secrets:
+      - ghcr_pass
+      - dockerhub_pass
+    commands:
+      - docker login docker.io -u fuzzymistborn -p $dockerhub_pass
+      - docker login ghcr.io -u fuzzymistborn -p $ghcr_pass
+      - docker build -t fuzzymistborn/docker-alpine-skopeo:latest -t fuzzymistborn/docker-alpine-skopeo:$ALPINE_VER -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:latest -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:$ALPINE_VER .
+      - docker push --all-tags fuzzymistborn/docker-alpine-skopeo
+      - docker push --all-tags ghcr.io/fuzzymistborn/docker-alpine-skopeo
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  - name: Send TG Notification
+    image: appleboy/drone-telegram
+    settings:
+      token:
+        from_secret: tg_token
+      to:
+        from_secret: tg_id
+      format: markdown
+      message: "{{#success build.status}}✅  Build for `{{repo.name}}` was *successful*!{{else}}❌  Build for `{{repo.name}}` has *FAILED*!{{/success}} \n🌐  [Output]({{build.link}})\n📝  Commit: {{ commit.message }}"
+    when:
+      event: {}
+      status:
+        - success
+        - failure
+
+when:
+  event: manual
