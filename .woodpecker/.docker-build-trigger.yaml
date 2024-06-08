@@ -9,9 +9,9 @@ steps:
     commands:
       - docker login docker.io -u fuzzymistborn -p $dockerhub_pass
       - docker login ghcr.io -u fuzzymistborn -p $ghcr_pass
-      - docker build -t fuzzymistborn/docker-alpine-skopeo:latest -t fuzzymistborn/docker-alpine-skopeo:$ALPINE_VER -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:latest -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:$ALPINE_VER .
-      - docker push --all-tags fuzzymistborn/docker-alpine-skopeo
-      - docker push --all-tags ghcr.io/fuzzymistborn/docker-alpine-skopeo
+      - docker build -t fuzzymistborn/docker-linting:latest -t fuzzymistborn/docker-linting:$PYTHON_VER -t ghcr.io/fuzzymistborn/docker-linting:latest -t ghcr.io/fuzzymistborn/docker-linting:$PYTHON_VER .
+      - docker push --all-tags fuzzymistborn/docker-linting
+      - docker push --all-tags ghcr.io/fuzzymistborn/docker-linting
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
