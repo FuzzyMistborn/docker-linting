@@ -2,10 +2,11 @@ steps:
   - name: Build and push release
     image: fuzzymistborn/docker-alpine-skopeo:latest
     environment:
-      - PYTHON_VER=python-3.12
-    secrets:
-      - ghcr_pass
-      - dockerhub_pass
+      PYTHON_VER: python-3.12
+      ghcr_pass:
+        from_secret: ghcr_pass
+      dockerhub_pass:
+        from_secret: dockerhub_pass
     commands:
       - docker login docker.io -u fuzzymistborn -p $dockerhub_pass
       - docker login ghcr.io -u fuzzymistborn -p $ghcr_pass
@@ -25,7 +26,7 @@ steps:
       format: markdown
       message: "{{#success build.status}}✅  Build for `{{repo.name}}` was *successful*!{{else}}❌  Build for `{{repo.name}}` has *FAILED*!{{/success}} \n🌐  [Output]({{build.link}})\n📝  Commit: {{ commit.message }}"
     when:
-      event: {}
+      event: cron
       status:
         - success
         - failure
